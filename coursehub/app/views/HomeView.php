@@ -12,9 +12,12 @@ class HomeView {
         $html .= '<section class="hero" aria-labelledby="hero-h">';
         $html .= '<div class="hero-content">';
         $html .= '<h1 id="hero-h">Discover Your Future at CourseHub</h1>';
-       $html .= '<p>Explore world-class undergraduate and postgraduate programmes. Find the course that matches your ambition, register your interest, and take the first step towards your career.</p>';
-        // TODO: Add hero action buttons here
-        $html .= '</div></section>';
+        $html .= '<p>Explore world-class undergraduate and postgraduate programmes. Find the course that matches your ambition, register your interest, and take the first step towards your career.</p>';
+        $html .= '<div class="hero-actions">';
+        $html .= '<a href="/programmes?level=Undergraduate" class="btn btn-accent btn-lg"><i class="fa fa-graduation-cap"></i> Undergraduate</a>';
+        $html .= '<a href="/programmes?level=Postgraduate" class="btn btn-white btn-lg"><i class="fa fa-flask"></i> Postgraduate</a>';
+        $html .= '<a href="/programmes" class="btn btn-lg" style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.35)"><i class="fa fa-th-large"></i> All Programmes</a>';
+        $html .= '</div></div></section>';
 
         // TODO: Add statistics strip here
 
