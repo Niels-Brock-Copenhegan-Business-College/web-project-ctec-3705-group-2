@@ -12,7 +12,7 @@ class HomeView {
         $html .= '<section class="hero" aria-labelledby="hero-h">';
         $html .= '<div class="hero-content">';
         $html .= '<h1 id="hero-h">Discover Your Future at CourseHub</h1>';
-        // TODO: Add hero subtitle paragraph here
+       $html .= '<p>Explore world-class undergraduate and postgraduate programmes. Find the course that matches your ambition, register your interest, and take the first step towards your career.</p>';
         // TODO: Add hero action buttons here
         $html .= '</div></section>';
 
