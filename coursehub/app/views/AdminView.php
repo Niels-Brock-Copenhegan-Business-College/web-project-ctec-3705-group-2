@@ -1,5 +1,9 @@
 <?php
 declare(strict_types=1);
+/**
+ * AdminView — Renders the admin dashboard, login page, and all CRUD forms
+ * for managing programmes, modules, staff, and interest registrations.
+ */
 
 class AdminView
 {
