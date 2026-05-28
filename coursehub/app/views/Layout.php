@@ -320,7 +320,13 @@ HTML;
         <li><a href="/interest/withdraw">Withdraw Interest</a></li>
       </ul>
     </div>
-    <!-- TODO: Add footer Contact section here -->
+<div class="footer-col footer-contact">
+      <h4>Contact</h4>
+      <p><i class="fa fa-envelope"></i> <a href="mailto:admissions@coursehub.ac.uk">admissions@coursehub.ac.uk</a></p>
+      <p><i class="fa fa-phone"></i> +44 (0)1234 567 000</p>
+      <p><i class="fa fa-map-marker-alt"></i> CourseHub University<br>Academic House, London EC1A 1BB</p>
+      <p><i class="fa fa-clock"></i> Mon–Fri, 9 am – 5 pm</p>
+    </div>
   </div>
   <div class="footer-bottom">
     <span>&copy; {$year} CourseHub. All rights reserved.</span>
