@@ -80,7 +80,7 @@ class HomeView {
             : '<span style="font-size:4rem">🎓</span>';
 
         $html  = '<article class="prog-card">';
-        $html .= '<div class="prog-card-img">' . $img . '</div>';
+        $html .= '<div class="prog-card-img">' . $img . '<div class="overlay"></div></div>';
         $html .= '<div class="prog-card-body">';
         $html .= '<div class="flex items-center gap-1 mb-1"><span class="badge ' . $badge . '">' . $level . '</span>';
         $html .= '<span class="text-xs text-muted"><i class="fa fa-clock"></i> ' . $dur . ' yr' . ($dur>1?'s':'') . '</span></div>';
