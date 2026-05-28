@@ -90,7 +90,11 @@ class HomeView {
         $html .= '</div>';
         $html .= '<div class="prog-card-footer">';
         $html .= '<a href="/programmes/' . $slug . '" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> View</a>';
-        // TODO: Add favourite button here
+      if ($showFav && !empty($_SESSION['student_id'])) {
+            $html .= '<form action="/favourite/' . $slug . '" method="POST" style="display:inline">';
+            $html .= '<button type="submit" class="btn btn-ghost btn-sm" title="Save to favourites"><i class="fa fa-heart" style="color:var(--error)"></i></button>';
+            $html .= '</form>';
+        }
         $html .= '</div></article>';
         return $html;
     }
