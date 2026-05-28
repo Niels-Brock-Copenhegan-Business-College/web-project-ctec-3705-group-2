@@ -245,7 +245,7 @@ footer{background:#071626;color:rgba(255,255,255,.55);padding:0;margin-top:auto}
 </style>
 </head>
 <body>
-<!-- TODO: Add skip-to-content link here -->
+<a class="skip" href="#main">Skip to main content</a>
 HTML;
     }
 
