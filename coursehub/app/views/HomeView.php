@@ -46,7 +46,21 @@ class HomeView {
         $html .= '</div>';
         $html .= '<div class="mt-3 text-right"><a href="/programmes" class="btn btn-outline"><i class="fa fa-arrow-right"></i> View all programmes</a></div>';
 
-        // TODO: Add Why Choose Us section here
+       $html .= '<div class="section-head mt-4"><h2>Why Choose CourseHub?</h2></div>';
+        $html .= '<div class="grid-4">';
+        $features = [
+            ['fa-microscope','Research-Led Teaching','Learn from academics at the forefront of their fields, with research directly informing our curriculum.'],
+            ['fa-briefcase','Industry Connections','Benefit from partnerships with leading employers, placement opportunities, and real-world projects.'],
+            ['fa-users','Supportive Community','Join a diverse, inclusive community with dedicated academic support throughout your studies.'],
+            ['fa-chart-line','Career Outcomes','95% of our graduates are employed or in further study within six months of completing their degree.'],
+        ];
+        foreach ($features as [$icon,$title,$desc]) {
+            $html .= '<div class="card card-body text-center">';
+            $html .= '<div style="font-size:2.5rem;color:var(--blue);margin-bottom:.75rem"><i class="fa ' . $icon . '"></i></div>';
+            $html .= '<h3 style="font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.5rem">' . $title . '</h3>';
+            $html .= '<p class="text-muted text-sm">' . $desc . '</p></div>';
+        }
+        $html .= '</div>';
 
         $html .= '</div></main>';
         $html .= Layout::footer();
