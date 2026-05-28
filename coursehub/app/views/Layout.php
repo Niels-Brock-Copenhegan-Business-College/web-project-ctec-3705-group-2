@@ -336,7 +336,15 @@ HTML;
 <script>
 const toggle=document.querySelector('.nav-toggle'),nav=document.getElementById('main-nav');
 if(toggle&&nav){toggle.addEventListener('click',()=>{const o=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',o);})}
-// TODO: Add password show/hide toggle script here
+// Password show/hide
+document.querySelectorAll('.input-icon[data-toggle-pw]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const inp=btn.closest('.input-wrap').querySelector('input');
+    const isText=inp.type==='text';
+    inp.type=isText?'password':'text';
+    btn.innerHTML=isText?'<i class="fa fa-eye"></i>':'<i class="fa fa-eye-slash"></i>';
+  });
+});
 </script>
 </body></html>
 HTML;
