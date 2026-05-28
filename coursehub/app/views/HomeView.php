@@ -29,8 +29,14 @@ class HomeView {
         $html .= '<div class="container page-pad">';
         $html .= Layout::flash();
 
-        // TODO: Add search form here
-
+        $html .= '<div class="section-head mt-4"><h2>Find Your Programme</h2><p>Search by keyword or filter by study level</p></div>';
+        $html .= '<form action="/programmes" method="GET" role="search" class="flex gap-2 flex-wrap items-center" style="background:var(--white);padding:1.5rem;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border-light)">';
+        $html .= '<input type="search" name="search" class="form-control" placeholder="e.g. Computer Science, Data Science…" style="max-width:320px" aria-label="Search programmes">';
+        $html .= '<select name="level" class="form-control" style="max-width:200px" aria-label="Level">';
+        $html .= '<option value="">All levels</option><option value="Undergraduate">Undergraduate</option><option value="Postgraduate">Postgraduate</option>';
+        $html .= '</select>';
+        $html .= '<button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>';
+        $html .= '</form>';
         // Featured programmes
         $html .= '<div class="section-head"><h2>Featured Programmes</h2><p>Explore some of our most popular degree programmes</p></div>';
         $html .= '<div class="grid-3">';
