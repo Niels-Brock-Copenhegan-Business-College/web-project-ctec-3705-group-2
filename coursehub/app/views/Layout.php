@@ -16,6 +16,7 @@ class Layout
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#0a2342">
 <title>{$title} · {$app}</title>
 <meta name="description" content="CourseHub — Explore undergraduate and postgraduate programmes, modules, and academic staff .">
 <link rel="preconnect" href="https://fonts.googleapis.com">
