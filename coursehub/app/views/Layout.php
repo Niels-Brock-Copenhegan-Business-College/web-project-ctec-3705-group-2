@@ -311,7 +311,15 @@ HTML;
         <li><a href="/staff">Academic Staff</a></li>
       </ul>
     </div>
-    <!-- TODO: Add footer Account links section here -->
+   <div class="footer-col">
+      <h4>Account</h4>
+      <ul>
+        <li><a href="/register">Create Account</a></li>
+        <li><a href="/login">Sign In</a></li>
+        <li><a href="/account">My Dashboard</a></li>
+        <li><a href="/interest/withdraw">Withdraw Interest</a></li>
+      </ul>
+    </div>
     <!-- TODO: Add footer Contact section here -->
   </div>
   <div class="footer-bottom">
