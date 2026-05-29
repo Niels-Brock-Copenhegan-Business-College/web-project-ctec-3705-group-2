@@ -118,10 +118,10 @@ class StudentAuthController
             $this->model->setResetToken((int)$s['id'],$token);
             $_SESSION['reset_token_display'] = $token;
             $_SESSION['reset_email_display'] = $email;
-            // TODO: Add logging here
+            $this->logger->info('Password reset requested', ['email' => $email]);
             return $res->withHeader('Location','/forgot-password/sent')->withStatus(302);
         }
-        // TODO: Add logging here
+        $this->logger->info('Password reset requested for unknown email', ['email' => $email]);
         $_SESSION['reset_token_display'] = null;
         $_SESSION['reset_email_display'] = $email;
         return $res->withHeader('Location','/forgot-password/sent')->withStatus(302);
@@ -156,7 +156,7 @@ class StudentAuthController
         if($pass!==$pass2){$_SESSION['flash_error']='Passwords do not match.';return $res->withHeader('Location','/reset-password?token='.$token)->withStatus(302);}
         $this->model->updatePassword((int)$s['id'],password_hash($pass,PASSWORD_BCRYPT));
         $this->model->clearResetToken((int)$s['id']);
-        // TODO: Add logging here
+        $this->logger->info('Password reset completed', ['student_id' => $s['id']]);
         $_SESSION['flash_success']='Password reset successfully. Please sign in.';
         return $res->withHeader('Location','/login')->withStatus(302);
     }
