@@ -4,6 +4,12 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Log\LoggerInterface;
 
+
+/**
+ * ProgrammeController — Handles programme browsing, detail view,
+ * interest registration, and interest withdrawal.
+ * All actions are logged via Monolog for audit purposes.
+ */
 class ProgrammeController
 {
     private ProgrammeModule $module;
