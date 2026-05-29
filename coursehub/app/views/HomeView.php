@@ -76,7 +76,7 @@ class HomeView {
         $badge  = $p['level']==='Undergraduate'?'badge-ug':'badge-pg';
         $dur    = (int)($p['duration_years']??3);
         $img    = !empty($p['image_url'])
-            ? '<img src="'.htmlspecialchars($p['image_url'],ENT_QUOTES).'" alt="'.htmlspecialchars($p['title'],ENT_QUOTES).'">'
+        ? '<img loading="lazy" src="'.htmlspecialchars($p['image_url'],ENT_QUOTES).'" alt="'.htmlspecialchars($p['title'],ENT_QUOTES).'">'
             : '<span style="font-size:4rem">🎓</span>';
 
         $html  = '<article class="prog-card">';
