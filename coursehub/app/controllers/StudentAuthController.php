@@ -76,7 +76,7 @@ class StudentAuthController
         $pass  = $d['password']??'';
         $s     = $this->model->findByEmail($email);
         if(!$s||!password_verify($pass,$s['password_hash'])){
-            // TODO: Add logging here
+            $this->logger->warning('Student login failed', ['email' => $email]);
             $_SESSION['flash_error']='Invalid email or password.';
             return $res->withHeader('Location','/login')->withStatus(302);
         }
@@ -85,7 +85,7 @@ class StudentAuthController
         $_SESSION['student_first_name'] = $s['first_name'];
         $_SESSION['student_email']      = $s['email'];
         $_SESSION['flash_success']      = 'Welcome back, '.$s['first_name'].'!';
-        // TODO: Add logging here
+        $this->logger->info('Student login', ['id' => $s['id'], 'email' => $email]);
         $redirect = $_SESSION['login_redirect']??'/account';
         unset($_SESSION['login_redirect']);
         return $res->withHeader('Location',$redirect)->withStatus(302);
@@ -96,7 +96,7 @@ class StudentAuthController
         $sid = $_SESSION['student_id'] ?? null;
         unset($_SESSION['student_id'],$_SESSION['student_first_name'],$_SESSION['student_email']);
         $_SESSION['flash_success']='You have been logged out.';
-        // TODO: Add logging here
+        $this->logger->info('Student logout', ['student_id' => $sid]);
         return $res->withHeader('Location','/')->withStatus(302);
     }
 
