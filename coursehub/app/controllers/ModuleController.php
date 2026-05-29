@@ -25,7 +25,7 @@ class ModuleController
 
     public function listAll(Request $req, Response $res): Response
     {
-        // TODO: Add logging here
+        $this->logger->info('Module list viewed', ['count' => count($modules)]);
         $modules = $this->module->getAllModules();
         // TODO: Add logging here
         $res->getBody()->write($this->view->renderAllModules($modules));
@@ -35,7 +35,7 @@ class ModuleController
     public function listByProgramme(Request $req, Response $res, array $args): Response
     {
         $pid = (int)$args['id'];
-        // TODO: Add logging here
+        $this->logger->info('Modules by programme viewed', ['programme_id' => $pid, 'count' => count($modules)]);
         $modules = $this->module->getModulesByProgrammeId($pid);
         $res->getBody()->write($this->view->render($modules, $pid));
         return $res;
