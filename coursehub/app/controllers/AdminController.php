@@ -210,7 +210,7 @@ class AdminController
             'image_url'       => $this->h($d['image_url'] ?? ''),
             'module_leader_id'=> ($d['module_leader_id'] ?? '') ?: null,
         ]);
-        // TODO: Add logging here
+        $this->logger->info('Module created', ['title' => $this->h($d['title'] ?? '')]);
         $_SESSION['flash_success'] = 'Module created.';
         return $res->withHeader('Location', '/admin/modules')->withStatus(302);
     }
@@ -237,7 +237,7 @@ class AdminController
             'image_url'       => $this->h($d['image_url'] ?? ''),
             'module_leader_id'=> ($d['module_leader_id'] ?? '') ?: null,
         ]);
-        // TODO: Add logging here
+        $this->logger->info('Module updated', ['id' => (int)$args['id']]);
         $_SESSION['flash_success'] = 'Module updated.';
         return $res->withHeader('Location', '/admin/modules')->withStatus(302);
     }
@@ -246,7 +246,7 @@ class AdminController
     {
         if ($r = $this->requireAdmin($res)) return $r;
         (new ModuleModule())->deleteModule((int)$args['id']);
-        // TODO: Add logging here
+        $this->logger->info('Module deleted', ['id' => (int)$args['id']]);
         $_SESSION['flash_success'] = 'Module deleted.';
         return $res->withHeader('Location', '/admin/modules')->withStatus(302);
     }
@@ -282,7 +282,7 @@ class AdminController
             'office'     => $this->h($d['office'] ?? ''),
             'photo_url'  => $this->h($d['photo_url'] ?? ''),
         ]);
-        // TODO: Add logging here
+        $this->logger->info('Staff created', ['name' => $this->h($d['name'] ?? '')]);
         $_SESSION['flash_success'] = 'Staff member created.';
         return $res->withHeader('Location', '/admin/staff')->withStatus(302);
     }
@@ -313,7 +313,7 @@ class AdminController
             'photo_url'  => $this->h($d['photo_url'] ?? ''),
         ]);
         if (!empty($d['password'])) $sm->updatePassword($id, password_hash($d['password'], PASSWORD_BCRYPT));
-        // TODO: Add logging here
+        $this->logger->info('Staff updated', ['id' => $id]);
         $_SESSION['flash_success'] = 'Staff updated.';
         return $res->withHeader('Location', '/admin/staff')->withStatus(302);
     }
@@ -322,7 +322,7 @@ class AdminController
     {
         if ($r = $this->requireAdmin($res)) return $r;
         (new StaffModule())->deleteStaff((int)$args['id']);
-        // TODO: Add logging here
+        $this->logger->info('Staff deleted', ['id' => (int)$args['id']]);
         $_SESSION['flash_success'] = 'Staff member deleted.';
         return $res->withHeader('Location', '/admin/staff')->withStatus(302);
     }
@@ -356,7 +356,7 @@ class AdminController
     {
         if ($r = $this->requireAdmin($res)) return $r;
         (new InterestModel())->deleteById((int)$args['id']);
-        // TODO: Add logging here
+        $this->logger->info('Registration deleted by admin', ['id' => (int)$args['id']]);
         $_SESSION['flash_success'] = 'Registration deleted.';
         return $res->withHeader('Location', '/admin/registrations')->withStatus(302);
     }
