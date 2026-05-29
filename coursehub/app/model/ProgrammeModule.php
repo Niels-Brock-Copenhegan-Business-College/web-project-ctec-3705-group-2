@@ -55,6 +55,7 @@ class ProgrammeModule
     }
     public function deleteProgramme(int $id): void { $this->db->prepare('DELETE FROM programmes WHERE id=?')->execute([$id]); }
     public function togglePublished(int $id): void { $this->db->prepare('UPDATE programmes SET published=CASE WHEN published=1 THEN 0 ELSE 1 END WHERE id=?')->execute([$id]); }
+    /** Sync modules for a programme: deletes existing links then re-inserts selected IDs. */
     public function syncModules(int $pid, array $mids): void {
         $this->db->prepare('DELETE FROM programme_modules WHERE programme_id=?')->execute([$pid]);
         $st=$this->db->prepare('INSERT OR IGNORE INTO programme_modules (programme_id,module_id) VALUES (?,?)');
