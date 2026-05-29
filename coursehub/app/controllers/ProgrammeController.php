@@ -30,14 +30,14 @@ class ProgrammeController
         $kw   = trim($p['search']??'');
         $lv   = trim($p['level']??'');
         $progs = ($kw||$lv) ? $this->module->searchProgrammes($kw,$lv) : $this->module->getAllPublishedProgrammes();
-        // TODO: Add logging here
+        $this->logger->info('Programme list viewed', ['search' => $kw ?: null, 'level' => $lv ?: null, 'results' => count($progs)]);
         $res->getBody()->write($this->view->renderProgrammeList($progs));
         return $res;
     }
 
     public function show(Request $req, Response $res, array $args): Response {
         $p = $this->module->getProgrammeBySlug($args['slug']);
-        // TODO: Add logging here
+        $this->logger->warning('Programme not found', ['slug' => $args['slug']]);
         $mm = new ModuleModule();
         $mods = $mm->getModulesByProgrammeId((int)$p['id']);
         $byYear = [];
@@ -52,7 +52,7 @@ class ProgrammeController
         $st = $db->prepare('SELECT DISTINCT p.title,p.slug,p.level FROM programmes p JOIN programme_modules pm ON pm.programme_id=p.id WHERE pm.module_id IN (SELECT module_id FROM programme_modules WHERE programme_id=?) AND p.id!=? AND p.published=1 ORDER BY p.title LIMIT 6');
         $st->execute([(int)$p['id'],(int)$p['id']]);
         $shared = $st->fetchAll();
-        // TODO: Add logging here
+        $this->logger->info('Programme detail viewed', ['slug' => $args['slug'], 'title' => $p['title']]);
         $res->getBody()->write($this->view->renderProgrammeDetail($p,$byYear,$shared));
         return $res;
     }
