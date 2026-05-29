@@ -76,7 +76,7 @@ class StaffController
 
     public function logout(Request $req, Response $res): Response
     {
-        // TODO: Add logging here
+        $this->logger->info('Staff logout', ['id' => $_SESSION['staff_id'] ?? null, 'email' => $_SESSION['staff_email'] ?? '']);
         unset($_SESSION['staff_id'], $_SESSION['staff_name'], $_SESSION['staff_first_name'], $_SESSION['staff_email']);
         $_SESSION['flash_success'] = 'You have been logged out.';
         return $res->withHeader('Location', '/staff')->withStatus(302);
@@ -123,7 +123,7 @@ class StaffController
             'photo_url'  => $this->h($data['photo_url'] ?? ''),
         ]);
         $_SESSION['staff_name'] = $this->h($data['name'] ?? '');
-        // TODO: Add logging here
+        $this->logger->info('Staff profile updated', ['id' => $id, 'name' => $this->h($data['name'] ?? '')]);
         $_SESSION['flash_success'] = 'Profile updated successfully.';
         return $res->withHeader('Location', '/staff/profile/edit')->withStatus(302);
     }
