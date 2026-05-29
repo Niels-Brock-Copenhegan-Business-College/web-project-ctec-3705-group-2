@@ -332,6 +332,7 @@ HTML;
     <span>&copy; {$year} CourseHub. All rights reserved.</span>
     <span>Built with the Slim Framework &middot; <a href="/admin/login">Staff &amp; Admin</a></span>
   </div>
+<p style="text-align:center;font-size:.7rem;color:rgba(255,255,255,.4);padding-bottom:.5rem">Built with PHP, Slim Framework, and SQLite</p>
 </footer>
 <script>
 const toggle=document.querySelector('.nav-toggle'),nav=document.getElementById('main-nav');
