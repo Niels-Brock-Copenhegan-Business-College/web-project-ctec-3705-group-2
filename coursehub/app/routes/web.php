@@ -1,5 +1,12 @@
 <?php
 declare(strict_types=1);
+
+/**
+ * Route definitions — Maps all HTTP endpoints to controller methods.
+ * The logger is injected into every controller for consistent audit logging.
+ * Routes are grouped by feature: auth, programmes, modules, staff, admin.
+ */
+
 use Psr\Log\LoggerInterface;
 use Slim\App;
 
