@@ -85,7 +85,7 @@ class ProgrammeController
             return $res->withHeader('Location','/programmes/'.$args['slug'])->withStatus(302);
         }
         $im->create(['first_name'=>$first,'last_name'=>$last,'email'=>$email,'phone'=>$phone,'programme_id'=>$p['id'],'student_id'=>$sid,'message'=>$msg]);
-        // TODO: Add logging here
+        $this->logger->info('Interest registered', ['email' => $email, 'programme' => $p['title']]);
         return $res->withHeader('Location','/interest/confirmed?programme='.urlencode($p['title']))->withStatus(302);
     }
 
@@ -104,8 +104,8 @@ class ProgrammeController
         $email = filter_var(trim(((array)$req->getParsedBody())['email']??''),FILTER_SANITIZE_EMAIL);
         if (!filter_var($email,FILTER_VALIDATE_EMAIL)) { $_SESSION['flash_error']='Enter a valid email.'; return $res->withHeader('Location','/interest/withdraw')->withStatus(302); }
         $n = (new InterestModel())->deleteByEmail($email);
-        // TODO: Add logging here
-        // TODO: Add logging here
+        $this->logger->info('Interest withdrawn via email', ['email' => $email, 'count' => $n]);
+        $this->logger->info('Interest withdrawal — no records found', ['email' => $email]);
         return $res->withHeader('Location','/interest/withdraw')->withStatus(302);
     }
 }
