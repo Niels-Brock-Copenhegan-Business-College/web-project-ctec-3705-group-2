@@ -1,6 +1,10 @@
 <?php
 declare(strict_types=1);
-
+/**
+ * Bootstrap — Application initialisation.
+ * Creates the Monolog logger (writes to logs/app.log) and
+ * establishes the SQLite PDO database connection with foreign key support.
+ */
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
