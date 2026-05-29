@@ -65,7 +65,7 @@ class ProgrammeModule
         $st->execute([$id]);return $st->fetchAll();
     }
     private function makeSlug(string $t): string {
-        return strtolower(str_replace(' ', '-', $t));
+        return trim(preg_replace('/[\s-]+/','-',preg_replace('/[^a-z0-9\s-]/','',strtolower($t))),'-');
     }
    public function count(): int {
         return (int)$this->db->query('SELECT COUNT(*) FROM programmes')->fetchColumn();
