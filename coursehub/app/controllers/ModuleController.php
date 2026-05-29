@@ -46,11 +46,11 @@ class ModuleController
         $id = (int)$args['id'];
         $m  = $this->module->getModuleById($id);
         if (!$m) {
-            // TODO: Add logging here
+            $this->logger->warning('Module not found', ['id' => (int)$args['id']]);
             $_SESSION['flash_error'] = 'Module not found.';
             return $res->withHeader('Location', '/modules')->withStatus(302);
         }
-        // TODO: Add logging here
+        $this->logger->info('Module detail viewed', ['id' => $m['id'], 'title' => $m['title']]);
         $programmes = $this->module->getProgrammesForModule((int)$m['id']);
         $res->getBody()->write($this->view->renderModuleDetail($m, $programmes));
         return $res;
