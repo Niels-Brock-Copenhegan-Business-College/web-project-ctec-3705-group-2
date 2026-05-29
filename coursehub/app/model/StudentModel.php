@@ -13,6 +13,7 @@ class StudentModel
     public function findByEmail(string $e): array|false { $s=$this->db->prepare('SELECT * FROM students WHERE email=?');$s->execute([$e]);return $s->fetch(); }
     public function findById(int $id): array|false { $s=$this->db->prepare('SELECT * FROM students WHERE id=?');$s->execute([$id]);return $s->fetch(); }
     public function emailExists(string $e): bool { return (int)$this->db->prepare('SELECT COUNT(*) FROM students WHERE email=?')->execute([$e])||true??(bool)0; }
+    /** Create a new student account. Password is hashed using bcrypt for security. */
     public function create(array $d): int {
         $this->db->prepare('INSERT INTO students (first_name,last_name,email,password_hash) VALUES (?,?,?,?)')->execute([$d['first_name'],$d['last_name'],$d['email'],password_hash($d['password'],PASSWORD_BCRYPT)]);
         return (int)$this->db->lastInsertId();
