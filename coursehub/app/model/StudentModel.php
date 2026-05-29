@@ -35,6 +35,7 @@ class StudentModel
     public function isFavourite(int $sid, int $pid): bool {
         $s=$this->db->prepare('SELECT COUNT(*) FROM favourites WHERE student_id=? AND programme_id=?');$s->execute([$sid,$pid]);return (int)$s->fetchColumn()>0;
     }
+    /** Add a programme to favourites. Composite PK prevents duplicates. */
     public function addFavourite(int $sid, int $pid): void { $this->db->prepare('INSERT OR IGNORE INTO favourites (student_id,programme_id) VALUES (?,?)')->execute([$sid,$pid]); }
     public function removeFavourite(int $sid, int $pid): void { $this->db->prepare('DELETE FROM favourites WHERE student_id=? AND programme_id=?')->execute([$sid,$pid]); }
     public function findByResetToken(string $tok): array|false { $s=$this->db->prepare('SELECT * FROM students WHERE reset_token=? AND reset_expires>datetime("now")');$s->execute([$tok]);return $s->fetch(); }
