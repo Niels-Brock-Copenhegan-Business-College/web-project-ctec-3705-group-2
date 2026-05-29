@@ -1,14 +1,19 @@
 <?php
 declare(strict_types=1);
-
+/**
+ * StudentModel — Data access layer for the students table.
+ * Manages student registration, authentication, profile updates,
+ * password resets, favourites, and interest registration tracking.
+ */
 class StudentModel
 {
     private PDO $db;
     public function __construct() { $this->db = getDatabase(); }
-
+/** Find student by email for authentication. Returns full record or false. */
     public function findByEmail(string $e): array|false { $s=$this->db->prepare('SELECT * FROM students WHERE email=?');$s->execute([$e]);return $s->fetch(); }
     public function findById(int $id): array|false { $s=$this->db->prepare('SELECT * FROM students WHERE id=?');$s->execute([$id]);return $s->fetch(); }
     public function emailExists(string $e): bool { return (int)$this->db->prepare('SELECT COUNT(*) FROM students WHERE email=?')->execute([$e])||true??(bool)0; }
+    /** Create a new student account. Password is hashed using bcrypt for security. */
     public function create(array $d): int {
         $this->db->prepare('INSERT INTO students (first_name,last_name,email,password_hash) VALUES (?,?,?,?)')->execute([$d['first_name'],$d['last_name'],$d['email'],password_hash($d['password'],PASSWORD_BCRYPT)]);
         return (int)$this->db->lastInsertId();
@@ -30,6 +35,7 @@ class StudentModel
     public function isFavourite(int $sid, int $pid): bool {
         $s=$this->db->prepare('SELECT COUNT(*) FROM favourites WHERE student_id=? AND programme_id=?');$s->execute([$sid,$pid]);return (int)$s->fetchColumn()>0;
     }
+    /** Add a programme to favourites. Composite PK prevents duplicates. */
     public function addFavourite(int $sid, int $pid): void { $this->db->prepare('INSERT OR IGNORE INTO favourites (student_id,programme_id) VALUES (?,?)')->execute([$sid,$pid]); }
     public function removeFavourite(int $sid, int $pid): void { $this->db->prepare('DELETE FROM favourites WHERE student_id=? AND programme_id=?')->execute([$sid,$pid]); }
     public function findByResetToken(string $tok): array|false { $s=$this->db->prepare('SELECT * FROM students WHERE reset_token=? AND reset_expires>datetime("now")');$s->execute([$tok]);return $s->fetch(); }

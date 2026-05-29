@@ -1,5 +1,9 @@
 <?php
 declare(strict_types=1);
+/**
+ * AdminModel — Data access layer for the admins table.
+ * Provides admin authentication via username lookup and password verification.
+ */
 class AdminModel {
     private PDO $db;
     public function __construct(){$this->db=getDatabase();}

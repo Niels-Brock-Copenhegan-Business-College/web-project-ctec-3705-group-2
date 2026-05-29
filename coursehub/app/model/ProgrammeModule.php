@@ -1,6 +1,12 @@
 <?php
 declare(strict_types=1);
 
+/**
+ * ProgrammeModule — Data access layer for the programmes table.
+ * Handles CRUD operations, search/filter, slug lookup, module syncing,
+ * and publish toggling. Uses PDO with prepared statements.
+ */
+
 class ProgrammeModule
 {
     private PDO $db;
@@ -32,7 +38,7 @@ class ProgrammeModule
         $sql='SELECT p.*,s.name AS leader_name FROM programmes p LEFT JOIN staff s ON p.programme_leader_id=s.id WHERE p.published=1';
         $b=[];
         if($kw){$sql.=' AND (p.title LIKE ? OR p.description LIKE ?)';$b[]="%$kw%";$b[]="%$kw%";}
-        if($level){$sql.=' AND p.level=?';$b[]=$level;}
+        if($level&&in_array($level,['Undergraduate','Postgraduate'])){$sql.=' AND p.level=?';$b[]=$level;}
         $sql.=' ORDER BY p.level,p.title';
         $st=$this->db->prepare($sql);$st->execute($b);return $st->fetchAll();
     }
@@ -59,12 +65,12 @@ class ProgrammeModule
         $st->execute([$id]);return $st->fetchAll();
     }
     private function makeSlug(string $t): string {
-        return strtolower(str_replace(' ', '-', $t));
+        return trim(preg_replace('/[\s-]+/','-',preg_replace('/[^a-z0-9\s-]/','',strtolower($t))),'-');
     }
-    public function count(): int {
-        return 0;
+   public function count(): int {
+        return (int)$this->db->query('SELECT COUNT(*) FROM programmes')->fetchColumn();
     }
     public function countPublished(): int {
-        return 0;
+        return (int)$this->db->query('SELECT COUNT(*) FROM programmes WHERE published=1')->fetchColumn();
     }
 }

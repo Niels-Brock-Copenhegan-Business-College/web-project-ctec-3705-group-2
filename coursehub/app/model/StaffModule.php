@@ -1,5 +1,10 @@
 <?php
 declare(strict_types=1);
+/**
+ * StaffModule — Data access layer for the staff table.
+ * Handles staff CRUD, authentication lookup, password management,
+ * and retrieval of modules led by a specific staff member.
+ */
 class StaffModule
 {
     private PDO $db;
