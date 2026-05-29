@@ -71,6 +71,6 @@ class ProgrammeModule
         return (int)$this->db->query('SELECT COUNT(*) FROM programmes')->fetchColumn();
     }
     public function countPublished(): int {
-        return 0;
+        return (int)$this->db->query('SELECT COUNT(*) FROM programmes WHERE published=1')->fetchColumn();
     }
 }
