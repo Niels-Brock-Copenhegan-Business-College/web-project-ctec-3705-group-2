@@ -67,6 +67,7 @@ class AdminController
 
     public function dashboard(Request $req, Response $res): Response
     {
+        // Fetch statistics for admin dashboard overview
         if ($r = $this->requireAdmin($res)) return $r;
         $pm   = new ProgrammeModule();
         $mm   = new ModuleModule();

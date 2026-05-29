@@ -54,6 +54,7 @@ class StudentAuthController
         }
 
         $id = $this->model->create(['first_name'=>$first,'last_name'=>$last,'email'=>$email,'password'=>$pass]);
+        // Regenerate session ID to prevent session fixation attacks
         session_regenerate_id(true);
         $_SESSION['student_id']         = $id;
         $_SESSION['student_first_name'] = $first;
@@ -80,6 +81,7 @@ class StudentAuthController
             $_SESSION['flash_error']='Invalid email or password.';
             return $res->withHeader('Location','/login')->withStatus(302);
         }
+        // Regenerate session ID to prevent session fixation attacks
         session_regenerate_id(true);
         $_SESSION['student_id']         = $s['id'];
         $_SESSION['student_first_name'] = $s['first_name'];

@@ -71,6 +71,7 @@ function registerRoutes(App $app, LoggerInterface $logger): void
     $app->get( '/staff/{id}',          fn($q,$r,$a) => $sc->show($q,$r,$a));
 
     // ── Admin ─────────────────────────────────────────────────────────────────
+    // All admin routes require $_SESSION['admin_id'] — checked inside AdminController::guard()
     $app->get( '/admin/login',  fn($q,$r) => $ac->loginForm($q,$r));
     $app->post('/admin/login',  fn($q,$r) => $ac->login($q,$r));
     $app->get( '/admin/logout', fn($q,$r) => $ac->logout($q,$r));
