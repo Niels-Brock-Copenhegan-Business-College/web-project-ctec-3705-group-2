@@ -17,7 +17,7 @@ function registerRoutes(App $app, LoggerInterface $logger): void
     $mc  = new ModuleController(new ModuleModule(), new ModuleView(), $logger);
     $ac  = new AdminController($logger);
     $sac = new StudentAuthController($logger);
-
+// ── Homepage ──────────────────────────────────────────────────────────────
     $app->get('/', function($req,$res) use ($logger) {
         // TODO: Add homepage logging
         $pm  = new ProgrammeModule(); $mm = new ModuleModule(); $sm = new StaffModule();
@@ -26,6 +26,7 @@ function registerRoutes(App $app, LoggerInterface $logger): void
         return $res;
     });
 
+// ── Student auth ──────────────────────────────────────────────────────────
     $app->get( '/register',        fn($q,$r)   => $sac->registerForm($q,$r));
     $app->post('/register',        fn($q,$r)   => $sac->register($q,$r));
     $app->get( '/login',           fn($q,$r)   => $sac->loginForm($q,$r));
@@ -44,6 +45,7 @@ function registerRoutes(App $app, LoggerInterface $logger): void
     $app->post('/account/withdraw/{id}', fn($q,$r,$a) => $sac->withdrawInterest($q,$r,$a));
     $app->post('/favourite/{slug}',      fn($q,$r,$a) => $sac->toggleFavourite($q,$r,$a));
 
+    // ── Programmes ────────────────────────────────────────────────────────────
     $app->get('/programmes',               fn($q,$r)   => $pc->index($q,$r));
     $app->get('/programmes/{slug}',        fn($q,$r,$a) => $pc->show($q,$r,$a));
     $app->post('/programmes/{slug}/register',fn($q,$r,$a) => $pc->registerInterest($q,$r,$a));
