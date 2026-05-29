@@ -48,7 +48,7 @@ class StudentAuthController
         if($email && $this->model->checkEmailExists($email)) $errors[]='An account with that email already exists.';
 
         if($errors){
-            // TODO: Add logging here
+            $this->logger->warning('Student registration failed', ['email' => $email, 'errors' => $errors]);
             $_SESSION['flash_error']=implode(' ',$errors);
             return $res->withHeader('Location','/register')->withStatus(302);
         }
@@ -59,7 +59,7 @@ class StudentAuthController
         $_SESSION['student_first_name'] = $first;
         $_SESSION['student_email']      = $email;
         $_SESSION['flash_success']      = 'Welcome, '.$first.'! Your account has been created.';
-        // TODO: Add logging here
+        $this->logger->info('Student registered', ['id' => $id, 'email' => $email]);
         return $res->withHeader('Location','/account')->withStatus(302);
     }
 
