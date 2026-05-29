@@ -139,7 +139,7 @@ class StaffController
         $staff   = $this->model->getStaffById($id);
 
         if (!password_verify($current, $staff['password_hash'])) {
-            // TODO: Add logging here
+            $this->logger->info('Staff password changed', ['id' => $id]);
             $_SESSION['flash_error'] = 'Current password is incorrect.';
         } elseif (strlen($new) < 8) {
             $_SESSION['flash_error'] = 'New password must be at least 8 characters.';
@@ -147,7 +147,7 @@ class StaffController
             $_SESSION['flash_error'] = 'Passwords do not match.';
         } else {
             $this->model->updatePassword($id, password_hash($new, PASSWORD_BCRYPT), $new);
-            // TODO: Add logging here
+            $this->logger->warning('Staff password change failed — wrong current password', ['id' => $id]);
             $_SESSION['flash_success'] = 'Password updated successfully.';
         }
         return $res->withHeader('Location', '/staff/profile/edit')->withStatus(302);
@@ -157,7 +157,7 @@ class StaffController
     {
         if (empty($_SESSION['staff_id'])) return $res->withHeader('Location', '/staff/login')->withStatus(302);
         $id = (int)$_SESSION['staff_id'];
-        // TODO: Add logging here
+        $this->logger->info('Staff profile deleted', ['id' => $id, 'email' => $_SESSION['staff_email'] ?? '']);
         $this->model->deleteStaff($id);
         unset($_SESSION['staff_id'], $_SESSION['staff_name'], $_SESSION['staff_first_name'], $_SESSION['staff_email']);
         $_SESSION['flash_success'] = 'Your staff profile has been deleted.';
