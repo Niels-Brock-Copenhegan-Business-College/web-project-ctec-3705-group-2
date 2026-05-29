@@ -120,7 +120,7 @@ class AdminController
             'programme_leader_id'=> ($d['programme_leader_id'] ?? '') ?: null,
         ]);
         $pm->syncModules($id, $d['modules'] ?? []);
-        // TODO: Add logging here
+        $this->logger->info('Programme created', ['id' => $id, 'title' => $this->h($d['title'] ?? '')]);
         $_SESSION['flash_success'] = 'Programme created.';
         return $res->withHeader('Location', '/admin/programmes')->withStatus(302);
     }
@@ -157,7 +157,7 @@ class AdminController
             'programme_leader_id'=> ($d['programme_leader_id'] ?? '') ?: null,
         ]);
         $pm->syncModules($id, $d['modules'] ?? []);
-        // TODO: Add logging here
+        $this->logger->info('Programme updated', ['id' => $id, 'title' => $this->h($d['title'] ?? '')]);
         $_SESSION['flash_success'] = 'Programme updated.';
         return $res->withHeader('Location', '/admin/programmes')->withStatus(302);
     }
@@ -166,7 +166,7 @@ class AdminController
     {
         if ($r = $this->requireAdmin($res)) return $r;
         (new ProgrammeModule())->deleteProgramme((int)$args['id']);
-        // TODO: Add logging here
+        $this->logger->info('Programme deleted', ['id' => (int)$args['id']]);
         $_SESSION['flash_success'] = 'Programme deleted.';
         return $res->withHeader('Location', '/admin/programmes')->withStatus(302);
     }
@@ -175,7 +175,7 @@ class AdminController
     {
         if ($r = $this->requireAdmin($res)) return $r;
         (new ProgrammeModule())->togglePublished((int)$args['id']);
-        // TODO: Add logging here
+        $this->logger->info('Programme publish toggled', ['id' => (int)$args['id']]);
         $_SESSION['flash_success'] = 'Published status updated.';
         return $res->withHeader('Location', '/admin/programmes')->withStatus(302);
     }
