@@ -59,7 +59,7 @@ class StaffController
         $staff = $this->model->findByEmail($email);
 
         if (!$staff || !password_verify($pass, $staff['password_hash'])) {
-            // TODO: Add logging here
+            $this->logger->info('Staff login', ['email' => $email]);
             $_SESSION['flash_error'] = 'Invalid email or password.';
             return $res->withHeader('Location', '/staff/login')->withStatus(302);
         }
@@ -70,7 +70,7 @@ class StaffController
         $_SESSION['staff_first_name'] = explode(' ', $staff['name'])[0];
         $_SESSION['staff_email']      = $staff['email'];
         $_SESSION['flash_success']    = 'Welcome back, ' . explode(' ', $staff['name'])[0] . '!';
-        // TODO: Add logging here
+        $this->logger->warning('Staff login failed', ['email' => $email]);
         return $res->withHeader('Location', '/staff/portal')->withStatus(302);
     }
 
