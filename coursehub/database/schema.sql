@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS students (
     reset_expires DATETIME,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
-
+-- Interest registrations: expressions of interest from students/guests for programmes
 CREATE TABLE IF NOT EXISTS interest_registrations (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     first_name TEXT NOT NULL,
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS interest_registrations (
     FOREIGN KEY (programme_id) REFERENCES programmes(id) ON DELETE CASCADE,
     FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE SET NULL
 );
-
+-- Junction table: resolves M:M between students and programmes (saved favourites)
 CREATE TABLE IF NOT EXISTS favourites (
     student_id INTEGER NOT NULL,
     programme_id INTEGER NOT NULL,
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS favourites (
     FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
     FOREIGN KEY (programme_id) REFERENCES programmes(id) ON DELETE CASCADE
 );
-
+-- Admins table: standalone admin accounts for dashboard access (no FK relationships)
 CREATE TABLE IF NOT EXISTS admins (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT UNIQUE NOT NULL,
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS admins (
     password_hash TEXT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
-
+-- Contact messages: standalone table for public contact form submissions
 CREATE TABLE IF NOT EXISTS contact_messages (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
