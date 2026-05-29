@@ -1,6 +1,12 @@
 <?php
 declare(strict_types=1);
 
+/**
+ * ProgrammeModule — Data access layer for the programmes table.
+ * Handles CRUD operations, search/filter, slug lookup, module syncing,
+ * and publish toggling. Uses PDO with prepared statements.
+ */
+
 class ProgrammeModule
 {
     private PDO $db;
