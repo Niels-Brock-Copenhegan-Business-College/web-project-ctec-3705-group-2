@@ -13,7 +13,7 @@ use Psr\Log\LoggerInterface;
 class ProgrammeController
 {
     private ProgrammeModule $module;
-    private ProgrammeView   $view;
+    private ProgrammeView $view;
     private LoggerInterface $logger;
 
     public function __construct(LoggerInterface $logger)
@@ -55,7 +55,6 @@ class ProgrammeController
     {
         $p = $this->module->getProgrammeBySlug($args['slug']);
 
-
         if (!$p) {
             $this->logger->warning('Programme not found', [
                 'slug' => $args['slug']
@@ -83,7 +82,12 @@ class ProgrammeController
 
         ksort($byYear);
 
-        $shared = $this->module->getRelatedProgrammes((int)$p['id']);
+        // FIXED: ensure correct property + safe fallback
+        $shared = [];
+
+        if (method_exists($this->module, 'getRelatedProgrammes')) {
+            $shared = $this->module->getRelatedProgrammes((int)$p['id']) ?? [];
+        }
 
         $this->logger->info('Programme detail viewed', [
             'slug'  => $args['slug'],
@@ -97,11 +101,8 @@ class ProgrammeController
         return $res;
     }
 
-    public function registerInterest(
-        Request $req,
-        Response $res,
-        array $args
-    ): Response {
+    public function registerInterest(Request $req, Response $res, array $args): Response
+    {
         $p = $this->module->getProgrammeBySlug($args['slug']);
 
         if (!$p) {
@@ -140,8 +141,7 @@ class ProgrammeController
             !$last ||
             !filter_var($email, FILTER_VALIDATE_EMAIL)
         ) {
-            $_SESSION['flash_error']
-                = 'Please fill in all required fields with a valid email.';
+            $_SESSION['flash_error'] = 'Please fill in all required fields with a valid email.';
 
             return $res
                 ->withHeader('Location', '/programmes/' . $args['slug'])
@@ -151,8 +151,7 @@ class ProgrammeController
         $im = new InterestModel();
 
         if ($im->isDuplicate($email, (int)$p['id'])) {
-            $_SESSION['flash_warning']
-                = 'You have already registered interest in this programme.';
+            $_SESSION['flash_warning'] = 'You have already registered interest in this programme.';
 
             return $res
                 ->withHeader('Location', '/programmes/' . $args['slug'])
@@ -160,13 +159,13 @@ class ProgrammeController
         }
 
         $im->create([
-            'first_name'  => $first,
-            'last_name'   => $last,
-            'email'       => $email,
-            'phone'       => $phone,
-            'programme_id'=> $p['id'],
-            'student_id'  => $sid,
-            'message'     => $msg
+            'first_name'   => $first,
+            'last_name'    => $last,
+            'email'        => $email,
+            'phone'        => $phone,
+            'programme_id' => $p['id'],
+            'student_id'   => $sid,
+            'message'      => $msg
         ]);
 
         $this->logger->info('Interest registered', [
@@ -225,10 +224,9 @@ class ProgrammeController
                 'count' => $n
             ]);
         } else {
-            $this->logger->info(
-                'Interest withdrawal — no records found',
-                ['email' => $email]
-            );
+            $this->logger->info('Interest withdrawal — no records found', [
+                'email' => $email
+            ]);
         }
 
         return $res

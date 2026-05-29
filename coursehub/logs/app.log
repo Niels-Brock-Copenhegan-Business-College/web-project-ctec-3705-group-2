@@ -1,0 +1,18 @@
+[2026-05-29T20:06:18.417343+02:00] coursehub.INFO: Homepage viewed  
+[2026-05-29T20:06:20.638026+02:00] coursehub.INFO: Homepage viewed  
+[2026-05-29T20:11:15.643262+02:00] coursehub.INFO: Programme list viewed {"search":null,"level":"Postgraduate","results":6} 
+[2026-05-29T20:11:20.671739+02:00] coursehub.INFO: Module list viewed {"count":34} 
+[2026-05-29T20:13:21.656442+02:00] coursehub.INFO: Programme list viewed {"search":null,"level":"Postgraduate","results":6} 
+[2026-05-29T20:13:25.528646+02:00] coursehub.INFO: Programme detail viewed {"slug":"msc-artificial-intelligence","title":"MSc Artificial Intelligence"} 
+[2026-05-29T20:13:28.237385+02:00] coursehub.INFO: Programme detail viewed {"slug":"msc-artificial-intelligence","title":"MSc Artificial Intelligence"} 
+[2026-05-29T20:18:54.391614+02:00] coursehub.INFO: Homepage viewed  
+[2026-05-29T20:21:40.315873+02:00] coursehub.INFO: Programme detail viewed {"slug":"msc-business-analytics","title":"MSc Business Analytics"} 
+[2026-05-29T20:21:40.494000+02:00] coursehub.INFO: Programme detail viewed {"slug":"msc-business-analytics","title":"MSc Business Analytics"} 
+[2026-05-29T20:22:30.947600+02:00] coursehub.INFO: Homepage viewed  
+[2026-05-29T20:22:53.243298+02:00] coursehub.INFO: Homepage viewed  
+[2026-05-29T20:22:56.941554+02:00] coursehub.INFO: Programme detail viewed {"slug":"msc-business-analytics","title":"MSc Business Analytics"} 
+[2026-05-29T20:23:14.227987+02:00] coursehub.INFO: Programme list viewed {"search":null,"level":null,"results":12} 
+[2026-05-29T20:23:16.700587+02:00] coursehub.INFO: Programme detail viewed {"slug":"bsc-business-administration","title":"BSc Business Administration"} 
+[2026-05-29T20:24:18.060654+02:00] coursehub.WARNING: Student login failed {"email":"urmi@gmail.com"} 
+[2026-05-29T20:24:42.237930+02:00] coursehub.INFO: Student registered {"id":1,"email":"urmi@gmail.com"} 
+[2026-05-29T20:24:42.356154+02:00] coursehub.DEBUG: Student account viewed {"student_id":1} 
