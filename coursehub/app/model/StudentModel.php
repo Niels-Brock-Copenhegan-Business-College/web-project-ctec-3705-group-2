@@ -39,6 +39,7 @@ class StudentModel
     public function addFavourite(int $sid, int $pid): void { $this->db->prepare('INSERT OR IGNORE INTO favourites (student_id,programme_id) VALUES (?,?)')->execute([$sid,$pid]); }
     public function removeFavourite(int $sid, int $pid): void { $this->db->prepare('DELETE FROM favourites WHERE student_id=? AND programme_id=?')->execute([$sid,$pid]); }
     public function findByResetToken(string $tok): array|false { $s=$this->db->prepare('SELECT * FROM students WHERE reset_token=? AND reset_expires>datetime("now")');$s->execute([$tok]);return $s->fetch(); }
+    /** Store a secure random reset token with 1-hour expiry for password recovery. */
     public function setResetToken(int $id, string $tok): void { $this->db->prepare('UPDATE students SET reset_token=?,reset_expires=datetime("now","+1 hour") WHERE id=?')->execute([$tok,$id]); }
     public function clearResetToken(int $id): void { $this->db->prepare('UPDATE students SET reset_token=NULL,reset_expires=NULL WHERE id=?')->execute([$id]); }
     public function checkEmailExists(string $e): bool { $s=$this->db->prepare('SELECT COUNT(*) FROM students WHERE email=?');$s->execute([$e]);return (int)$s->fetchColumn()>0; }
