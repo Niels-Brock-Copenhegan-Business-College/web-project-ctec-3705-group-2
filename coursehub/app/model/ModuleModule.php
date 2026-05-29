@@ -24,7 +24,7 @@ class ModuleModule
         )->fetchAll();
     }
     public function getModuleById(int $id): array|false {
-        $st=$this->db->prepare('SELECT m.*,s.name AS leader_name,s.email AS leader_email,s.phone AS leader_phone,s.office AS leader_office,s.name AS leader_name2 -- TODO: add s.photo_url AS leader_photo FROM modules m LEFT JOIN staff s ON m.module_leader_id=s.id WHERE m.id=?');
+        $st=$this->db->prepare('SELECT m.*,s.name AS leader_name,s.email AS leader_email,s.phone AS leader_phone,s.office AS leader_office,s.name AS photo_url AS leader_photo FROM modules m LEFT JOIN staff s ON m.module_leader_id=s.id WHERE m.id=?');
         $st->execute([$id]);return $st->fetch();
     }
     public function getProgrammesForModule(int $mid): array {
