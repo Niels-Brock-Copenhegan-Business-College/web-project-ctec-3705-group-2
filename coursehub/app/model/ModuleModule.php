@@ -14,6 +14,7 @@ class ModuleModule
         $st=$this->db->prepare('SELECT m.*,s.name AS leader_name,s.email AS leader_email FROM modules m JOIN programme_modules pm ON pm.module_id=m.id LEFT JOIN staff s ON m.module_leader_id=s.id WHERE pm.programme_id=? ORDER BY m.year_of_study,m.title');
         $st->execute([$pid]);return $st->fetchAll();
     }
+    /** Retrieve all modules with leader names, programme counts, and level information. */
     public function getAllModules(): array {
         return $this->db->query(
             'SELECT m.*,s.name AS leader_name,
