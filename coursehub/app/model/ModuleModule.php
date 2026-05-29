@@ -1,6 +1,10 @@
 <?php
 declare(strict_types=1);
-
+/**
+ * ModuleModule — Data access layer for the modules table.
+ * Provides methods for retrieving modules by ID, programme, or keyword,
+ * creating/updating/deleting modules, and linking modules to programmes.
+ */
 class ModuleModule
 {
     private PDO $db;
