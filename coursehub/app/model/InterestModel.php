@@ -17,10 +17,12 @@ class InterestModel {
     public function isDuplicate(string $email, int $pid): bool {
         $s=$this->db->prepare('SELECT COUNT(*) FROM interest_registrations WHERE email=? AND programme_id=?');$s->execute([$email,$pid]);return (int)$s->fetchColumn()>0;
     }
+    /** Insert a new interest registration linking a student/guest to a programme. */
     public function create(array $d): void {
         $this->db->prepare('INSERT INTO interest_registrations (first_name,last_name,email,phone,programme_id,student_id,message) VALUES (?,?,?,?,?,?,?)')
             ->execute([$d['first_name'],$d['last_name'],$d['email'],$d['phone']??'',$d['programme_id'],$d['student_id']??null,$d['message']??'']);
     }
+    /** Remove all interest registrations for a given email. Returns count of deleted rows. */
     public function deleteByEmail(string $e): int { $s=$this->db->prepare('DELETE FROM interest_registrations WHERE email=?');$s->execute([$e]);return $s->rowCount(); }
     public function deleteById(int $id): void { $this->db->prepare('DELETE FROM interest_registrations WHERE id=?')->execute([$id]); }
     public function count(): int { return (int)$this->db->query('SELECT COUNT(*) FROM interest_registrations')->fetchColumn(); }

@@ -1,3 +1,11 @@
+-- ============================================================
+-- CourseHub DMU Database Schema
+-- Normalised to Third Normal Form (3NF)
+-- Uses SQLite with foreign key enforcement enabled
+-- 9 tables: staff, programmes, modules, programme_modules,
+--           students, favourites, interest_registrations,
+--           admins, contact_messages
+-- ============================================================
 PRAGMA foreign_keys = ON;
 
 -- Staff table: stores academic staff members who can lead programmes and modules

@@ -21,6 +21,7 @@ class StaffModule
     public function getStaffById(int $id): array|false {
         $s=$this->db->prepare('SELECT * FROM staff WHERE id=?');$s->execute([$id]);return $s->fetch();
     }
+    /** Find staff member by email for login authentication. Returns full record or false. */
     public function findByEmail(string $email): array|false {
         $s=$this->db->prepare('SELECT * FROM staff WHERE email=?');$s->execute([$email]);return $s->fetch();
     }

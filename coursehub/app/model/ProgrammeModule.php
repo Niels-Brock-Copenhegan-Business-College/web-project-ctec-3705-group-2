@@ -27,6 +27,7 @@ class ProgrammeModule
              FROM programmes p LEFT JOIN staff s ON p.programme_leader_id=s.id ORDER BY p.level,p.title'
         )->fetchAll();
     }
+    /** Find published programme by URL slug. Used for clean URLs like /programmes/bsc-computer-science. */
     public function getProgrammeBySlug(string $slug): array|false {
         $st=$this->db->prepare('SELECT p.*,s.name AS leader_name,s.email AS leader_email,s.bio AS leader_bio,s.phone AS leader_phone,s.office AS leader_office FROM programmes p LEFT JOIN staff s ON p.programme_leader_id=s.id WHERE p.slug=? AND p.published=1');
         $st->execute([$slug]);return $st->fetch();
@@ -55,6 +56,7 @@ class ProgrammeModule
     }
     public function deleteProgramme(int $id): void { $this->db->prepare('DELETE FROM programmes WHERE id=?')->execute([$id]); }
     public function togglePublished(int $id): void { $this->db->prepare('UPDATE programmes SET published=CASE WHEN published=1 THEN 0 ELSE 1 END WHERE id=?')->execute([$id]); }
+    /** Sync modules for a programme: deletes existing links then re-inserts selected IDs. */
     public function syncModules(int $pid, array $mids): void {
         $this->db->prepare('DELETE FROM programme_modules WHERE programme_id=?')->execute([$pid]);
         $st=$this->db->prepare('INSERT OR IGNORE INTO programme_modules (programme_id,module_id) VALUES (?,?)');
