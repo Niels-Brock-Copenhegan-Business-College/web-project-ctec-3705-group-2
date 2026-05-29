@@ -67,8 +67,8 @@ class ProgrammeModule
     private function makeSlug(string $t): string {
         return strtolower(str_replace(' ', '-', $t));
     }
-    public function count(): int {
-        return 0;
+   public function count(): int {
+        return (int)$this->db->query('SELECT COUNT(*) FROM programmes')->fetchColumn();
     }
     public function countPublished(): int {
         return 0;
