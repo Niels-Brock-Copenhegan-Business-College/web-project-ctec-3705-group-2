@@ -27,6 +27,7 @@ class ProgrammeModule
              FROM programmes p LEFT JOIN staff s ON p.programme_leader_id=s.id ORDER BY p.level,p.title'
         )->fetchAll();
     }
+    /** Find published programme by URL slug. Used for clean URLs like /programmes/bsc-computer-science. */
     public function getProgrammeBySlug(string $slug): array|false {
         $st=$this->db->prepare('SELECT p.*,s.name AS leader_name,s.email AS leader_email,s.bio AS leader_bio,s.phone AS leader_phone,s.office AS leader_office FROM programmes p LEFT JOIN staff s ON p.programme_leader_id=s.id WHERE p.slug=? AND p.published=1');
         $st->execute([$slug]);return $st->fetch();
