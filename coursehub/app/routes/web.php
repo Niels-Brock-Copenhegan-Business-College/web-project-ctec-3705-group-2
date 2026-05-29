@@ -19,7 +19,7 @@ function registerRoutes(App $app, LoggerInterface $logger): void
     $sac = new StudentAuthController($logger);
 // ── Homepage ──────────────────────────────────────────────────────────────
     $app->get('/', function($req,$res) use ($logger) {
-        // TODO: Add homepage logging
+        $logger->info('Homepage viewed');
         $pm  = new ProgrammeModule(); $mm = new ModuleModule(); $sm = new StaffModule();
         $stats = ['programmes'=>$pm->countPublished(),'modules'=>$mm->count(),'staff'=>$sm->count()];
         $res->getBody()->write((new HomeView())->render($stats, $pm->getAllPublishedProgrammes()));
