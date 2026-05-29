@@ -168,7 +168,7 @@ class StudentAuthController
         $s      = $this->model->findById($id);
         $ints   = $this->model->getInterests($id);
         $favs   = $this->model->getFavourites($id);
-        // TODO: Add logging here
+        $this->logger->debug('Student account viewed', ['student_id' => $id]);
         $res->getBody()->write($this->view->renderAccount($s,$ints,$favs));
         return $res;
     }
@@ -191,7 +191,7 @@ class StudentAuthController
         $this->model->updateProfile($id,['first_name'=>$fn,'last_name'=>$ln,'phone'=>trim($d['phone']??''),'bio'=>trim($d['bio']??'')]);
         $_SESSION['student_first_name']=$fn;
         $_SESSION['flash_success']='Profile updated.';
-        // TODO: Add logging here
+        $this->logger->info('Student profile updated', ['student_id' => $id]);
         return $res->withHeader('Location','/account/edit')->withStatus(302);
     }
 
@@ -201,14 +201,14 @@ class StudentAuthController
         $d  = (array)$req->getParsedBody();
         $s  = $this->model->findById($id);
         if(!password_verify($d['current_password']??'',$s['password_hash'])){
-            // TODO: Add logging here
+            $this->logger->warning('Student password change failed — wrong current password', ['student_id' => $id]);
             $_SESSION['flash_error']='Current password is incorrect.';
             return $res->withHeader('Location','/account/edit')->withStatus(302);
         }
         if(strlen($d['new_password']??'')<8){$_SESSION['flash_error']='New password must be at least 8 characters.';return $res->withHeader('Location','/account/edit')->withStatus(302);}
         if(($d['new_password']??'')!==($d['confirm_password']??'')){$_SESSION['flash_error']='Passwords do not match.';return $res->withHeader('Location','/account/edit')->withStatus(302);}
         $this->model->updatePassword($id,password_hash($d['new_password'],PASSWORD_BCRYPT));
-        // TODO: Add logging here
+        $this->logger->info('Student password changed', ['student_id' => $id]);
         $_SESSION['flash_success']='Password updated successfully.';
         return $res->withHeader('Location','/account/edit')->withStatus(302);
     }
@@ -216,7 +216,7 @@ class StudentAuthController
     public function deleteAccount(Request $req, Response $res): Response {
         if(empty($_SESSION['student_id'])) return $res->withHeader('Location','/login')->withStatus(302);
         $id = (int)$_SESSION['student_id'];
-        // TODO: Add logging here
+        $this->logger->info('Student account deleted', ['student_id' => $id]);
         $this->model->deleteStudent($id);
         unset($_SESSION['student_id'],$_SESSION['student_first_name'],$_SESSION['student_email']);
         $_SESSION['flash_success']='Your account has been deleted.';
