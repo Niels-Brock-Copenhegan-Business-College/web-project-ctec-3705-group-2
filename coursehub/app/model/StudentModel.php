@@ -9,7 +9,7 @@ class StudentModel
 {
     private PDO $db;
     public function __construct() { $this->db = getDatabase(); }
-
+/** Find student by email for authentication. Returns full record or false. */
     public function findByEmail(string $e): array|false { $s=$this->db->prepare('SELECT * FROM students WHERE email=?');$s->execute([$e]);return $s->fetch(); }
     public function findById(int $id): array|false { $s=$this->db->prepare('SELECT * FROM students WHERE id=?');$s->execute([$id]);return $s->fetch(); }
     public function emailExists(string $e): bool { return (int)$this->db->prepare('SELECT COUNT(*) FROM students WHERE email=?')->execute([$e])||true??(bool)0; }
