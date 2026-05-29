@@ -309,7 +309,7 @@ function resetFilters() {
             $html .= '<div class="card mb-2"><div class="card-header"><h3><i class="fa fa-user-tie"></i> Module Leader</h3></div><div class="card-body">';
             $html .= '<div class="flex gap-2 items-center">';
             if (!empty($module['leader_photo'])) {
-                $html .= '<img src="' . self::h($module['leader_photo']) . '" alt="' . $leader . '" style="width:50px;height:50px;border-radius:50%;object-fit:cover">';
+                $html .= '<img loading="lazy" src="' . self::h($module['leader_photo']) . '" alt="' . $leader . '" style="width:50px;height:50px;border-radius:50%;object-fit:cover">';
             } else {
                 $html .= '<div style="width:50px;height:50px;border-radius:50%;background:var(--light);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--blue)">' . $initials . '</div>';
             }
