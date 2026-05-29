@@ -88,7 +88,11 @@ class StudentAuthController
         $_SESSION['student_email']      = $s['email'];
         $_SESSION['flash_success']      = 'Welcome back, '.$s['first_name'].'!';
         $this->logger->info('Student login', ['id' => $s['id'], 'email' => $email]);
-        $redirect = $_SESSION['login_redirect']??'/account';
+        // FIXED: validate redirect to relative paths only — prevents open-redirect attacks
+        $raw      = $_SESSION['login_redirect'] ?? '/account';
+        $redirect = (is_string($raw) && str_starts_with($raw, '/') && !str_starts_with($raw, '//'))
+            ? $raw
+            : '/account';
         unset($_SESSION['login_redirect']);
         return $res->withHeader('Location',$redirect)->withStatus(302);
     }
@@ -154,8 +158,9 @@ class StudentAuthController
         $pass2 = $d['password_confirm']??'';
         $s = $this->model->findByResetToken($token);
         if(!$s){$_SESSION['flash_error']='Invalid or expired reset link.';return $res->withHeader('Location','/login')->withStatus(302);}
-        if(strlen($pass)<8){$_SESSION['flash_error']='Password must be at least 8 characters.';return $res->withHeader('Location','/reset-password?token='.$token)->withStatus(302);}
-        if($pass!==$pass2){$_SESSION['flash_error']='Passwords do not match.';return $res->withHeader('Location','/reset-password?token='.$token)->withStatus(302);}
+        // FIXED: urlencode token in redirect URL to prevent broken links if token contains special characters
+        if(strlen($pass)<8){$_SESSION['flash_error']='Password must be at least 8 characters.';return $res->withHeader('Location','/reset-password?token='.urlencode($token))->withStatus(302);}
+        if($pass!==$pass2){$_SESSION['flash_error']='Passwords do not match.';return $res->withHeader('Location','/reset-password?token='.urlencode($token))->withStatus(302);}
         $this->model->updatePassword((int)$s['id'],password_hash($pass,PASSWORD_BCRYPT));
         $this->model->clearResetToken((int)$s['id']);
         $this->logger->info('Password reset completed', ['student_id' => $s['id']]);
@@ -190,7 +195,13 @@ class StudentAuthController
         $fn = htmlspecialchars(trim($d['first_name']??''),ENT_QUOTES,'UTF-8');
         $ln = htmlspecialchars(trim($d['last_name']??''),ENT_QUOTES,'UTF-8');
         if(!$fn||!$ln){$_SESSION['flash_error']='First and last name are required.';return $res->withHeader('Location','/account/edit')->withStatus(302);}
-        $this->model->updateProfile($id,['first_name'=>$fn,'last_name'=>$ln,'phone'=>trim($d['phone']??''),'bio'=>trim($d['bio']??'')]);
+        $this->model->updateProfile($id,[
+            'first_name' => $fn,
+            'last_name'  => $ln,
+            // FIXED: sanitise phone and bio through $this->h() before persisting
+            'phone'      => $this->h($d['phone'] ?? ''),
+            'bio'        => $this->h($d['bio'] ?? ''),
+        ]);
         $_SESSION['student_first_name']=$fn;
         $_SESSION['flash_success']='Profile updated.';
         $this->logger->info('Student profile updated', ['student_id' => $id]);

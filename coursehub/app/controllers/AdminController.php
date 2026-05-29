@@ -277,7 +277,8 @@ class AdminController
             'role'       => $this->h($d['role'] ?? ''),
             'department' => $this->h($d['department'] ?? ''),
             'email'      => filter_var(trim($d['email'] ?? ''), FILTER_SANITIZE_EMAIL),
-            'password'   => $d['password'],
+            // FIXED: hash the password before storing — never persist plaintext credentials
+            'password'   => password_hash($d['password'], PASSWORD_BCRYPT),
             'bio'        => $this->h($d['bio'] ?? ''),
             'phone'      => $this->h($d['phone'] ?? ''),
             'office'     => $this->h($d['office'] ?? ''),
@@ -342,10 +343,11 @@ class AdminController
         if ($r = $this->requireAdmin($res)) return $r;
         $regs = (new InterestModel())->getAll();
         $csv  = "ID,First Name,Last Name,Email,Phone,Programme,Registered At\n";
-        foreach ($regs as $r2) {
+        // FIXED: renamed loop variable from $r2 to $row to avoid any confusion with outer $r (requireAdmin return)
+        foreach ($regs as $row) {
             $csv .= implode(',', array_map(fn($v) => '"' . str_replace('"', '""', $v) . '"', [
-                $r2['id'], $r2['first_name'], $r2['last_name'], $r2['email'],
-                $r2['phone'] ?? '', $r2['programme_title'], $r2['created_at']
+                $row['id'], $row['first_name'], $row['last_name'], $row['email'],
+                $row['phone'] ?? '', $row['programme_title'], $row['created_at']
             ])) . "\n";
         }
         $response = $res->withHeader('Content-Type', 'text/csv')->withHeader('Content-Disposition', 'attachment;filename=registrations.csv');
@@ -493,12 +495,9 @@ class AdminController
             $c  .= '<td>' . $pub . '</td>';
             $c  .= '<td><div class="flex gap-1">';
             // PREVIEW opens in new tab — admin stays on admin
-            if ($p['published']) {
-                $db2  = getDatabase();
-                $slug = $db2->prepare('SELECT slug FROM programmes WHERE id=?');
-                $slug->execute([$p['id']]);
-                $s = ($slug->fetchColumn()) ?: '';
-                $c .= '<a href="/programmes/' . htmlspecialchars($s) . '" target="_blank" class="btn btn-ghost btn-sm" title="Preview (opens in new tab)"><i class="fa fa-external-link-alt"></i></a>';
+            // FIXED: slug already included in getAllProgrammes() result; no extra per-row query needed
+            if ($p['published'] && !empty($p['slug'])) {
+                $c .= '<a href="/programmes/' . htmlspecialchars($p['slug']) . '" target="_blank" class="btn btn-ghost btn-sm" title="Preview (opens in new tab)"><i class="fa fa-external-link-alt"></i></a>';
             }
             $c .= '<a href="/admin/programmes/' . (int)$p['id'] . '/edit" class="btn btn-outline btn-sm"><i class="fa fa-edit"></i></a>';
             $c .= '<form action="/admin/programmes/' . (int)$p['id'] . '/toggle" method="POST" style="display:inline">';
