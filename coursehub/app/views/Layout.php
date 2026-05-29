@@ -1,5 +1,9 @@
 <?php
 declare(strict_types=1);
+/**
+ * Layout — Shared layout wrapper providing HTML head, navigation bar,
+ * footer, flash messages, and consistent styling across all pages.
+ */
 
 class Layout
 {
@@ -12,7 +16,9 @@ class Layout
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#0a2342">
 <title>{$title} · {$app}</title>
+<meta name="description" content="CourseHub — Explore undergraduate and postgraduate programmes, modules, and academic staff .">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -239,9 +245,10 @@ footer{background:#071626;color:rgba(255,255,255,.55);padding:0;margin-top:auto}
 }
 {$extra}
 </style>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
 </head>
 <body>
-<!-- TODO: Add skip-to-content link here -->
+<a class="skip" href="#main">Skip to main content</a>
 HTML;
     }
 
@@ -305,18 +312,41 @@ HTML;
         <li><a href="/staff">Academic Staff</a></li>
       </ul>
     </div>
-    <!-- TODO: Add footer Account links section here -->
-    <!-- TODO: Add footer Contact section here -->
+   <div class="footer-col">
+      <h4>Account</h4>
+      <ul>
+        <li><a href="/register">Create Account</a></li>
+        <li><a href="/login">Sign In</a></li>
+        <li><a href="/account">My Dashboard</a></li>
+        <li><a href="/interest/withdraw">Withdraw Interest</a></li>
+      </ul>
+    </div>
+<div class="footer-col footer-contact">
+      <h4>Contact</h4>
+      <p><i class="fa fa-envelope"></i> <a href="mailto:admissions@coursehub.ac.uk">admissions@coursehub.ac.uk</a></p>
+      <p><i class="fa fa-phone"></i> +44 (0)1234 567 000</p>
+      <p><i class="fa fa-map-marker-alt"></i> CourseHub University<br>Academic House, London EC1A 1BB</p>
+      <p><i class="fa fa-clock"></i> Mon–Fri, 9 am – 5 pm</p>
+    </div>
   </div>
   <div class="footer-bottom">
     <span>&copy; {$year} CourseHub. All rights reserved.</span>
     <span>Built with the Slim Framework &middot; <a href="/admin/login">Staff &amp; Admin</a></span>
   </div>
+<p style="text-align:center;font-size:.7rem;color:rgba(255,255,255,.4);padding-bottom:.5rem">Built with PHP, Slim Framework, and SQLite</p>
 </footer>
 <script>
 const toggle=document.querySelector('.nav-toggle'),nav=document.getElementById('main-nav');
 if(toggle&&nav){toggle.addEventListener('click',()=>{const o=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',o);})}
-// TODO: Add password show/hide toggle script here
+// Password show/hide
+document.querySelectorAll('.input-icon[data-toggle-pw]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const inp=btn.closest('.input-wrap').querySelector('input');
+    const isText=inp.type==='text';
+    inp.type=isText?'password':'text';
+    btn.innerHTML=isText?'<i class="fa fa-eye"></i>':'<i class="fa fa-eye-slash"></i>';
+  });
+});
 </script>
 </body></html>
 HTML;

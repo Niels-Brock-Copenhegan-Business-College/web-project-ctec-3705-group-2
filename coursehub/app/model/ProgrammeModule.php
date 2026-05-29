@@ -58,7 +58,13 @@ class ProgrammeModule
         $st=$this->db->prepare('SELECT m.*,s.name AS leader_name FROM modules m JOIN programme_modules pm ON pm.module_id=m.id LEFT JOIN staff s ON s.id=m.module_leader_id WHERE pm.programme_id=? ORDER BY m.year_of_study,m.title');
         $st->execute([$id]);return $st->fetchAll();
     }
-    private function makeSlug(string $t): string { return strtolower(str_replace(' ','-',$t));  }
-    public function count(): int { return 0;  }
-    public function countPublished(): int { return 0;  }
+    private function makeSlug(string $t): string {
+        return strtolower(str_replace(' ', '-', $t));
+    }
+    public function count(): int {
+        return 0;
+    }
+    public function countPublished(): int {
+        return 0;
+    }
 }
