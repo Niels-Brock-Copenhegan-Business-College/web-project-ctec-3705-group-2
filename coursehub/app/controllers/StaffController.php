@@ -4,6 +4,11 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Log\LoggerInterface;
 
+/**
+ * StaffController — Handles public staff directory, staff authentication,
+ * portal access, profile editing, and password management.
+ * All actions are logged via Monolog for audit purposes.
+ */
 class StaffController
 {
     private StaffModule $model;
