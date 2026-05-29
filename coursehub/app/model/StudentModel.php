@@ -1,6 +1,10 @@
 <?php
 declare(strict_types=1);
-
+/**
+ * StudentModel — Data access layer for the students table.
+ * Manages student registration, authentication, profile updates,
+ * password resets, favourites, and interest registration tracking.
+ */
 class StudentModel
 {
     private PDO $db;
