@@ -4,6 +4,12 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Log\LoggerInterface;
 
+/**
+ * ModuleController — Handles module listing (all and by programme),
+ * and individual module detail pages.
+ * All actions are logged via Monolog for audit purposes.
+ */
+
 class ModuleController
 {
     private ModuleModule    $module;
