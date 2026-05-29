@@ -1,5 +1,10 @@
 <?php
 declare(strict_types=1);
+/**
+ * InterestModel — Data access layer for the interest_registrations table.
+ * Handles creation, duplicate checking, retrieval, deletion,
+ * and email-based withdrawal of interest registrations.
+ */
 class InterestModel {
     private PDO $db;
     public function __construct(){$this->db=getDatabase();}
