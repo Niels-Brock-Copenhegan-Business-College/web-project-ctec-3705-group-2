@@ -229,7 +229,7 @@ class StudentAuthController
         $sid = (int)$_SESSION['student_id'];
         $iid = (int)$args['id'];
         $this->model->withdrawInterest($sid, $iid);
-        // TODO: Add logging here
+        $this->logger->info('Student withdrew interest', ['student_id' => $sid, 'interest_id' => $iid]);
         $_SESSION['flash_success']='Interest registration removed.';
         return $res->withHeader('Location','/account')->withStatus(302);
     }
@@ -243,11 +243,11 @@ class StudentAuthController
         if(!$p) return $res->withHeader('Location','/programmes')->withStatus(302);
         if($this->model->isFavourite($sid,(int)$p['id'])){
             $this->model->removeFavourite($sid,(int)$p['id']);
-            // TODO: Add logging here
+            $this->logger->info('Favourite removed', ['student_id' => $sid, 'programme' => $p['title']]);
             $_SESSION['flash_success']='Removed from favourites.';
         } else {
             $this->model->addFavourite($sid,(int)$p['id']);
-            // TODO: Add logging here
+            $this->logger->info('Favourite added', ['student_id' => $sid, 'programme' => $p['title']]);
             $_SESSION['flash_success']='Saved to favourites!';
         }
         return $res->withHeader('Location','/programmes/'.$args['slug'])->withStatus(302);
