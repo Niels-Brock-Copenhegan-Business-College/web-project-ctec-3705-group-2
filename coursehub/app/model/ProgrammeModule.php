@@ -38,7 +38,7 @@ class ProgrammeModule
         $sql='SELECT p.*,s.name AS leader_name FROM programmes p LEFT JOIN staff s ON p.programme_leader_id=s.id WHERE p.published=1';
         $b=[];
         if($kw){$sql.=' AND (p.title LIKE ? OR p.description LIKE ?)';$b[]="%$kw%";$b[]="%$kw%";}
-        if($level){$sql.=' AND p.level=?';$b[]=$level;}
+        if($level&&in_array($level,['Undergraduate','Postgraduate'])){$sql.=' AND p.level=?';$b[]=$level;}
         $sql.=' ORDER BY p.level,p.title';
         $st=$this->db->prepare($sql);$st->execute($b);return $st->fetchAll();
     }
