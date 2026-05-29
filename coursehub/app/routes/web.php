@@ -54,9 +54,11 @@ function registerRoutes(App $app, LoggerInterface $logger): void
     $app->post('/interest/withdraw',       fn($q,$r)   => $pc->withdraw($q,$r));
     $app->get('/interest/confirmed',       fn($q,$r)   => $pc->confirmed($q,$r));
 
+    // ── Modules (public) ──────────────────────────────────────────────────────
     $app->get('/modules',      fn($q,$r)   => $mc->listAll($q,$r));
     $app->get('/modules/{id}', fn($q,$r,$a) => $mc->show($q,$r,$a));
 
+    // ── Staff (public + portal) ────────────────────────────────────────────────
     $app->get( '/staff',               fn($q,$r)   => $sc->index($q,$r));
     $app->get( '/staff/login',         fn($q,$r)   => $sc->loginForm($q,$r));
     $app->post('/staff/login',         fn($q,$r)   => $sc->login($q,$r));
@@ -68,6 +70,7 @@ function registerRoutes(App $app, LoggerInterface $logger): void
     $app->post('/staff/profile/delete',fn($q,$r)   => $sc->deleteProfile($q,$r));
     $app->get( '/staff/{id}',          fn($q,$r,$a) => $sc->show($q,$r,$a));
 
+    // ── Admin ─────────────────────────────────────────────────────────────────
     $app->get( '/admin/login',  fn($q,$r) => $ac->loginForm($q,$r));
     $app->post('/admin/login',  fn($q,$r) => $ac->login($q,$r));
     $app->get( '/admin/logout', fn($q,$r) => $ac->logout($q,$r));
