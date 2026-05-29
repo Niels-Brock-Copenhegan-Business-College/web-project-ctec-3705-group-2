@@ -4,6 +4,11 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Log\LoggerInterface;
 
+/**
+ * AdminController — Handles admin authentication and full CRUD operations
+ * for programmes, modules, staff, and interest registrations via the admin dashboard.
+ * All actions are logged via Monolog for audit purposes.
+ */
 class AdminController
 {
     private AdminModel $admin;
