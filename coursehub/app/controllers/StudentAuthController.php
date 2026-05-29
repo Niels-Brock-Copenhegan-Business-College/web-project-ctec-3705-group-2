@@ -4,6 +4,11 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Log\LoggerInterface;
 
+/**
+ * StudentAuthController — Handles student registration, login/logout,
+ * password reset flow, account management, favourites, and interest withdrawal.
+ * All actions are logged via Monolog for audit purposes.
+ */
 class StudentAuthController
 {
     private StudentModel    $model;
