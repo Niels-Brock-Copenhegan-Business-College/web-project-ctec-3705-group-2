@@ -45,7 +45,7 @@ class AdminController
         $pass = $d['password'] ?? '';
         $a    = $this->admin->findByUsername($user);
         if (!$a || !password_verify($pass, $a['password_hash'])) {
-            // TODO: Add logging here
+            $this->logger->warning('Admin login failed', ['username' => $user]);
             $_SESSION['flash_error'] = 'Invalid credentials.';
             return $res->withHeader('Location', '/admin/login')->withStatus(302);
         }
@@ -53,13 +53,13 @@ class AdminController
         $_SESSION['admin_id']       = $a['id'];
         $_SESSION['admin_username'] = $a['username'];
         $_SESSION['flash_success']  = 'Welcome, ' . $a['username'] . '!';
-        // TODO: Add logging here
+        $this->logger->info('Admin login', ['username' => $user]);
         return $res->withHeader('Location', '/admin/dashboard')->withStatus(302);
     }
 
     public function logout(Request $req, Response $res): Response
     {
-        // TODO: Add logging here
+        $this->logger->info('Admin logout', ['username' => $_SESSION['admin_username'] ?? '']);
         unset($_SESSION['admin_id'], $_SESSION['admin_username']);
         $_SESSION['flash_success'] = 'Logged out successfully.';
         return $res->withHeader('Location', '/admin/login')->withStatus(302);
