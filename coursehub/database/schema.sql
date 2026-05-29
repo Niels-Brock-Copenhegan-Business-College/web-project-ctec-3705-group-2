@@ -1,5 +1,6 @@
 PRAGMA foreign_keys = ON;
 
+-- Staff table: stores academic staff members who can lead programmes and modules
 CREATE TABLE IF NOT EXISTS staff (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
@@ -14,7 +15,7 @@ CREATE TABLE IF NOT EXISTS staff (
     office TEXT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
-
+-- Programmes table: degree programmes offered (UG/PG) with publish control
 CREATE TABLE IF NOT EXISTS programmes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
@@ -29,7 +30,7 @@ CREATE TABLE IF NOT EXISTS programmes (
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (programme_leader_id) REFERENCES staff(id) ON DELETE SET NULL
 );
-
+-- Modules table: individual teaching modules with credit values and year grouping
 CREATE TABLE IF NOT EXISTS modules (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
@@ -42,7 +43,7 @@ CREATE TABLE IF NOT EXISTS modules (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (module_leader_id) REFERENCES staff(id) ON DELETE SET NULL
 );
-
+-- Junction table: resolves M:M relationship between programmes and modules
 CREATE TABLE IF NOT EXISTS programme_modules (
     programme_id INTEGER NOT NULL,
     module_id INTEGER NOT NULL,
@@ -50,7 +51,7 @@ CREATE TABLE IF NOT EXISTS programme_modules (
     FOREIGN KEY (programme_id) REFERENCES programmes(id) ON DELETE CASCADE,
     FOREIGN KEY (module_id) REFERENCES modules(id) ON DELETE CASCADE
 );
-
+-- Students table: registered student accounts with password reset support
 CREATE TABLE IF NOT EXISTS students (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     first_name TEXT NOT NULL,
