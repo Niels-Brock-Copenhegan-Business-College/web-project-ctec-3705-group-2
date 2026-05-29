@@ -48,3 +48,84 @@
 [2026-05-29T20:46:14.095113+02:00] coursehub.INFO: Homepage viewed  
 [2026-05-29T20:46:45.610211+02:00] coursehub.INFO: Homepage viewed  
 [2026-05-29T20:46:52.238023+02:00] coursehub.INFO: Module list viewed {"count":34} 
+[2026-05-29T21:41:17.650455+02:00] coursehub.INFO: Module list viewed {"count":34} 
+[2026-05-29T21:41:19.660455+02:00] coursehub.INFO: Homepage viewed  
+[2026-05-29T21:41:58.743581+02:00] coursehub.INFO: Programme detail viewed {"slug":"msc-artificial-intelligence","title":"MSc Artificial Intelligence"} 
+[2026-05-29T21:42:13.863483+02:00] coursehub.INFO: Programme detail viewed {"slug":"msc-business-analytics","title":"MSc Business Analytics"} 
+[2026-05-29T21:43:31.437353+02:00] coursehub.INFO: Interest registered {"email":"rim@gmail.com","programme":"MSc Business Analytics"} 
+[2026-05-29T21:43:37.704365+02:00] coursehub.DEBUG: Student account viewed {"student_id":2} 
+[2026-05-29T21:43:56.220441+02:00] coursehub.INFO: Programme list viewed {"search":null,"level":null,"results":12} 
+[2026-05-29T21:44:03.369840+02:00] coursehub.INFO: Programme detail viewed {"slug":"bsc-computer-science","title":"BSc Computer Science"} 
+[2026-05-29T21:44:25.607476+02:00] coursehub.INFO: Interest registered {"email":"rim@gmail.com","programme":"BSc Computer Science"} 
+[2026-05-29T21:44:28.322248+02:00] coursehub.DEBUG: Student account viewed {"student_id":2} 
+[2026-05-29T21:44:34.325150+02:00] coursehub.INFO: Programme list viewed {"search":null,"level":null,"results":12} 
+[2026-05-29T21:44:39.262629+02:00] coursehub.INFO: Module list viewed {"count":34} 
+[2026-05-29T21:44:59.731471+02:00] coursehub.INFO: Module list viewed {"count":34} 
+[2026-05-29T21:45:03.262062+02:00] coursehub.INFO: Module list viewed {"count":34} 
+[2026-05-29T21:45:24.457849+02:00] coursehub.INFO: Programme list viewed {"search":null,"level":null,"results":12} 
+[2026-05-29T21:45:36.836779+02:00] coursehub.INFO: Favourite added {"student_id":2,"programme":"BSc Computer Science"} 
+[2026-05-29T21:45:36.897002+02:00] coursehub.INFO: Programme detail viewed {"slug":"bsc-computer-science","title":"BSc Computer Science"} 
+[2026-05-29T21:45:49.386493+02:00] coursehub.DEBUG: Student account viewed {"student_id":2} 
+[2026-05-29T21:45:56.840596+02:00] coursehub.INFO: Student logout {"student_id":2} 
+[2026-05-29T21:45:56.892559+02:00] coursehub.INFO: Homepage viewed  
+[2026-05-29T21:47:23.099101+02:00] coursehub.INFO: Student registered {"id":3,"email":"ishrat@gmail.com"} 
+[2026-05-29T21:47:23.145525+02:00] coursehub.DEBUG: Student account viewed {"student_id":3} 
+[2026-05-29T21:47:42.957749+02:00] coursehub.INFO: Programme list viewed {"search":null,"level":null,"results":12} 
+[2026-05-29T21:47:52.717135+02:00] coursehub.INFO: Programme detail viewed {"slug":"bsc-cybersecurity","title":"BSc Cybersecurity"} 
+[2026-05-29T21:48:26.826015+02:00] coursehub.INFO: Interest registered {"email":"ishrat@gmail.com","programme":"BSc Cybersecurity"} 
+[2026-05-29T21:48:38.893343+02:00] coursehub.INFO: Programme list viewed {"search":null,"level":null,"results":12} 
+[2026-05-29T21:48:48.924735+02:00] coursehub.INFO: Programme detail viewed {"slug":"bsc-cybersecurity","title":"BSc Cybersecurity"} 
+[2026-05-29T21:48:58.715172+02:00] coursehub.INFO: Favourite added {"student_id":3,"programme":"BSc Cybersecurity"} 
+[2026-05-29T21:48:58.765204+02:00] coursehub.INFO: Programme detail viewed {"slug":"bsc-cybersecurity","title":"BSc Cybersecurity"} 
+[2026-05-29T21:49:04.706074+02:00] coursehub.DEBUG: Student account viewed {"student_id":3} 
+[2026-05-29T21:49:31.357922+02:00] coursehub.INFO: Module list viewed {"count":34} 
+[2026-05-29T22:15:08.865011+02:00] coursehub.INFO: Module list viewed {"count":34} 
+[2026-05-29T22:15:10.822333+02:00] coursehub.DEBUG: Student account viewed {"student_id":3} 
+[2026-05-29T22:15:15.813765+02:00] coursehub.INFO: Student logout {"student_id":3} 
+[2026-05-29T22:15:15.912240+02:00] coursehub.INFO: Homepage viewed  
+[2026-05-29T22:18:32.715260+02:00] coursehub.INFO: Programme list viewed {"search":null,"level":"Undergraduate","results":6} 
+[2026-05-29T22:27:11.958083+02:00] coursehub.INFO: Student registered {"id":4,"email":"oishy@gmail.com"} 
+[2026-05-29T22:27:12.087018+02:00] coursehub.DEBUG: Student account viewed {"student_id":4} 
+[2026-05-29T22:29:05.790181+02:00] coursehub.INFO: Student logout {"student_id":4} 
+[2026-05-29T22:29:05.911506+02:00] coursehub.INFO: Homepage viewed  
+[2026-05-29T22:29:18.149865+02:00] coursehub.INFO: Password reset requested {"email":"urmi@gmail.com"} 
+[2026-05-29T22:29:30.870773+02:00] coursehub.INFO: Password reset completed {"student_id":1} 
+[2026-05-29T22:29:44.792181+02:00] coursehub.INFO: Student login {"id":1,"email":"urmi@gmail.com"} 
+[2026-05-29T22:29:44.925131+02:00] coursehub.DEBUG: Student account viewed {"student_id":1} 
+[2026-05-29T22:31:36.708114+02:00] coursehub.INFO: Programme list viewed {"search":null,"level":null,"results":12} 
+[2026-05-29T22:31:39.809524+02:00] coursehub.INFO: Programme detail viewed {"slug":"bsc-business-administration","title":"BSc Business Administration"} 
+[2026-05-29T22:31:56.508598+02:00] coursehub.INFO: Programme detail viewed {"slug":"msc-business-analytics","title":"MSc Business Analytics"} 
+[2026-05-29T22:32:24.370228+02:00] coursehub.INFO: Interest registered {"email":"urmi@gmail.com","programme":"MSc Business Analytics"} 
+[2026-05-29T22:32:31.143023+02:00] coursehub.INFO: Programme list viewed {"search":null,"level":null,"results":12} 
+[2026-05-29T22:32:37.966737+02:00] coursehub.INFO: Programme detail viewed {"slug":"msc-business-analytics","title":"MSc Business Analytics"} 
+[2026-05-29T22:33:13.648334+02:00] coursehub.DEBUG: Student account viewed {"student_id":1} 
+[2026-05-29T22:33:17.277855+02:00] coursehub.INFO: Programme list viewed {"search":null,"level":null,"results":12} 
+[2026-05-29T22:33:26.074468+02:00] coursehub.DEBUG: Student account viewed {"student_id":1} 
+[2026-05-29T22:35:56.299347+02:00] coursehub.INFO: Programme created {"id":13,"title":"Computer science"} 
+[2026-05-29T22:38:01.634769+02:00] coursehub.INFO: Programme list viewed {"search":null,"level":null,"results":13} 
+[2026-05-29T22:38:10.468333+02:00] coursehub.DEBUG: Student account viewed {"student_id":1} 
+[2026-05-29T22:38:12.134323+02:00] coursehub.INFO: Homepage viewed  
+[2026-05-29T22:38:14.220891+02:00] coursehub.INFO: Student logout {"student_id":1} 
+[2026-05-29T22:38:14.296424+02:00] coursehub.INFO: Homepage viewed  
+[2026-05-29T22:54:57.386688+02:00] coursehub.INFO: Programme list viewed {"search":null,"level":null,"results":13} 
+[2026-05-29T22:55:23.110110+02:00] coursehub.INFO: Programme detail viewed {"slug":"msc-business-analytics","title":"MSc Business Analytics"} 
+[2026-05-29T22:55:27.046268+02:00] coursehub.INFO: Module list viewed {"count":34} 
+[2026-05-29T22:57:43.399759+02:00] coursehub.INFO: Module detail viewed {"id":27,"title":"Business Intelligence and Analytics"} 
+[2026-05-29T22:57:48.479719+02:00] coursehub.INFO: Module detail viewed {"id":27,"title":"Business Intelligence and Analytics"} 
+[2026-05-29T22:57:50.691833+02:00] coursehub.INFO: Programme list viewed {"search":null,"level":null,"results":13} 
+[2026-05-29T22:57:52.419954+02:00] coursehub.INFO: Programme detail viewed {"slug":"bsc-business-administration","title":"BSc Business Administration"} 
+[2026-05-29T23:08:13.486698+02:00] coursehub.INFO: Password reset requested {"email":"rim@gmail.com"} 
+[2026-05-29T23:08:22.931172+02:00] coursehub.INFO: Homepage viewed  
+[2026-05-29T23:26:16.935701+02:00] coursehub.INFO: Password reset requested {"email":"rim@gmail.com"} 
+[2026-05-29T23:26:39.663531+02:00] coursehub.INFO: Password reset completed {"student_id":2} 
+[2026-05-29T23:27:28.526878+02:00] coursehub.INFO: Student login {"id":2,"email":"rim@gmail.com"} 
+[2026-05-29T23:27:28.645508+02:00] coursehub.DEBUG: Student account viewed {"student_id":2} 
+[2026-05-29T23:32:12.177109+02:00] coursehub.INFO: Homepage viewed  
+[2026-05-29T23:32:15.476437+02:00] coursehub.INFO: Student logout {"student_id":2} 
+[2026-05-29T23:32:15.524396+02:00] coursehub.INFO: Homepage viewed  
+[2026-05-29T23:43:25.317710+02:00] coursehub.INFO: Password reset requested {"email":"rim@gmail.com"} 
+[2026-05-29T23:43:49.375847+02:00] coursehub.INFO: Password reset completed {"student_id":2} 
+[2026-05-29T23:45:03.629354+02:00] coursehub.WARNING: Student login failed {"email":"rim@gmail.com"} 
+[2026-05-29T23:45:14.136144+02:00] coursehub.INFO: Student login {"id":2,"email":"rim@gmail.com"} 
+[2026-05-29T23:45:14.212093+02:00] coursehub.DEBUG: Student account viewed {"student_id":2} 
+[2026-05-29T23:45:19.385981+02:00] coursehub.INFO: Programme list viewed {"search":null,"level":null,"results":13} 

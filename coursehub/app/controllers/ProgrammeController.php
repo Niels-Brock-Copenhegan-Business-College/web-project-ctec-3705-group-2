@@ -82,7 +82,7 @@ class ProgrammeController
 
         ksort($byYear);
 
-        // FIXED: ensure correct property + safe fallback
+        
         $shared = [];
 
         if (method_exists($this->module, 'getRelatedProgrammes')) {
